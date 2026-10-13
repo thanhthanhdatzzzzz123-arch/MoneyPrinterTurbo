@@ -28,6 +28,10 @@ The WebUI is served on **host port 3000** (Streamlit internally on 8501).
 2. `curl -s http://localhost:3000/_stcore/health` — should return `"ok"`.
 3. Open the preview — the Streamlit WebUI should load.
 
+## TTS / Voice (Kokoro — no API key needed)
+
+Edge TTS (Azure TTS v1) is blocked in this sandbox (Microsoft returns 403 on the WebSocket endpoint). Instead, a **Kokoro-FastAPI** CPU service (`ghcr.io/remsky/kokoro-fastapi-cpu:latest`) runs as a compose service and provides free, local, OpenAI-compatible TTS at `http://kokoro-tts:8880/v1`. The default voice is `af_heart`. The WebUI's config is pre-set to `voice_mode = "tts"`, `tts_server = "kokoro"`, `voice_name = "kokoro:af_heart"`. Users can pick any of the 72 built-in Kokoro voices from the WebUI dropdown.
+
 ## External credentials (optional)
 
-The app boots without any API keys. To actually generate videos, users need to provide at least one LLM provider key and one video-source key (e.g. Pexels) through the WebUI's configuration panel. These are stored in `config.toml` (gitignored), not environment variables.
+The app boots without any API keys. TTS works out of the box via Kokoro. To actually generate videos, users still need to provide at least one LLM provider key and one video-source key (e.g. Pexels) through the WebUI's configuration panel. These are stored in `config.toml` (gitignored), not environment variables.

@@ -1,4 +1,17 @@
 services:
+  kokoro-tts:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:latest
+    container_name: "moneyprinterturbo-kokoro-base44"
+    ports:
+      - "8880:8880"
+    restart: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8880/health').read()\""]
+      interval: 15s
+      timeout: 10s
+      start_period: 120s
+      retries: 5
+
   webui:
     build:
       context: .
@@ -16,6 +29,9 @@ services:
         "sh", "-ec",
         "uv sync --frozen && exec .venv/bin/streamlit run ./webui/Main.py --server.address=0.0.0.0 --server.port=8501 --server.enableCORS=false --server.enableXsrfProtection=false --browser.gatherUsageStats=False --client.toolbarMode=minimal --logger.hideWelcomeMessage=True --server.showEmailPrompt=False"
       ]
+    depends_on:
+      kokoro-tts:
+        condition: service_healthy
     restart: on-failure
     healthcheck:
       test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health').read()\""]
