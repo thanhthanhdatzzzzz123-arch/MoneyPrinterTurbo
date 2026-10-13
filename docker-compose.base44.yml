@@ -1,0 +1,25 @@
+services:
+  webui:
+    build:
+      context: .
+      dockerfile: Dockerfile.base44
+    container_name: "moneyprinterturbo-webui-base44"
+    ports:
+      - "3000:8501"
+    volumes:
+      - ./:/MoneyPrinterTurbo
+    environment:
+      - BASE44_PREVIEW_MODE
+      - PYTHONPATH=/MoneyPrinterTurbo
+    command:
+      [
+        "sh", "-ec",
+        "uv sync --frozen && exec .venv/bin/streamlit run ./webui/Main.py --server.address=0.0.0.0 --server.port=8501 --server.enableCORS=false --server.enableXsrfProtection=false --browser.gatherUsageStats=False --client.toolbarMode=minimal --logger.hideWelcomeMessage=True --server.showEmailPrompt=False"
+      ]
+    restart: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health').read()\""]
+      interval: 10s
+      timeout: 5s
+      start_period: 120s
+      retries: 5
