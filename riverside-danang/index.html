@@ -71,15 +71,28 @@
         <div class="top-ad">
           <span class="ad-label">Quảng cáo</span>
           <div class="top-ad-stage" data-top-ad>
-            <a class="top-ad-slide is-active" href="#kham-pha">
+            <a class="top-ad-slide is-active" href="#kham-pha" aria-label="Banner 1: Tài sản biểu tượng ven sông">
               <img src="assets/0e116e1cc.png" alt="Riverside Danang — Tài sản biểu tượng ven sông Hàn" width="1913" height="163">
             </a>
-            <a class="top-ad-slide" href="#kham-pha">
+            <a class="top-ad-slide" href="#kham-pha" aria-label="Banner 2: Vị thế danh giá bến sông Hàn" aria-hidden="true">
               <img src="assets/f875f9bed.png" alt="Riverside Danang — Vị thế danh giá bến sông Hàn" width="1907" height="156" loading="lazy">
             </a>
-            <a class="top-ad-slide" href="#kham-pha">
+            <a class="top-ad-slide" href="#kham-pha" aria-label="Banner 3: Urban Resort, sống xứng tầm thời thượng" aria-hidden="true">
               <img src="assets/a78b1a530.png" alt="Riverside Danang — Urban Resort, sống xứng tầm thời thượng" width="1902" height="156" loading="lazy">
             </a>
+          </div>
+
+          <button class="top-ad-nav top-ad-nav--prev" type="button" data-ad-prev aria-label="Banner quảng cáo trước">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="top-ad-nav top-ad-nav--next" type="button" data-ad-next aria-label="Banner quảng cáo tiếp theo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <div class="top-ad-dots" role="tablist" aria-label="Chọn banner quảng cáo">
+            <button class="top-ad-dot is-active" type="button" role="tab" aria-selected="true" aria-label="Banner 1" data-ad-dot></button>
+            <button class="top-ad-dot" type="button" role="tab" aria-selected="false" aria-label="Banner 2" data-ad-dot></button>
+            <button class="top-ad-dot" type="button" role="tab" aria-selected="false" aria-label="Banner 3" data-ad-dot></button>
           </div>
         </div>
       </header>
